@@ -130,8 +130,8 @@ App.controller("SyllabusController", function ($scope, $http, Upload, $timeout) 
                 success: function (data) {
                     if (data) {
                         alertify.success('Saved Successfully');
-                        //load();
-                      //  $scope.Books_GetDynamic();
+                        load();
+                       // $scope.Books_GetDynamic();
                     } else { alertify.error('Failed, Try again'); }
                 },
                 error: function (data) {
@@ -139,5 +139,8 @@ App.controller("SyllabusController", function ($scope, $http, Upload, $timeout) 
                 }
             });
         }
+    }
+    $scope.Reset = function () {
+        load();
     }
 });
