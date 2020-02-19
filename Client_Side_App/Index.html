@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Book House Application Backend">
+    <meta name="author" content="Touhid Alam">
+    <title>Technical Lab Test SPA</title>
+
+    <link href="CSS/bootstrap.css" type="text/css" rel="stylesheet">
+    <link href="CSS/sb-admin.css" type="text/css" rel="stylesheet">
+    <link href="CSS/alertify.min.css" type="text/css" rel="stylesheet">
+    <link href="CSS/morris.css" type="text/css" rel="stylesheet">
+    <link href="CSS/pikaday.css" type="text/css" rel="stylesheet">
+    <!--<link href="CSS/font-awesome.min.css" type="text/css" rel="stylesheet">-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+
+
+    <script src="Scripts/jquery-1.9.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/alertify.min.js"></script>
+    <script src="Scripts/moment.min.js"></script>
+    <script src="Scripts/pikaday.js"></script>
+    <script src="Scripts/linq.min.js"></script>
+    <script src="Scripts/raphael.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js"></script>
+
+    <script src="Index.js"></script>
+    <script src="SPA/Syllabus/SyllabusController.js"></script>
+
+    <base href="/" />
+</head>
+
+<body ng-app="App">
+    <div class="row">
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div ng-view></div>
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <div id="bottomTitle">
+            <p class="text-center">
+                <strong>
+                    All Right Reserved. Designed and Developed by © <a href="https://fb.com/touhidalam69" target="_blank"> Touhid Alam</a>
+                </strong>
+            </p>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#loader").hide();
+            $(document).ajaxStart(function () {
+                $("#overlay").addClass("overlay");
+                $("#overlay :input").attr("disabled", "disabled");
+                $("#loader").show();
+            }).ajaxStop(function () {
+                $('#overlay').removeClass("overlay");
+                $("#overlay :input").removeAttr("disabled");
+                $("#loader").hide();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<form name="SyllabusForm" class="search-form">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-group"></i>&nbsp;Syllabus Details</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <div class="form-group" data-toggle="tooltip" data-placement="bottom" title="Syllabus Name">
+                                    <div class="input-group">
+                                        <input type="text" ng-model="Syllabus.SyllabusName" class="form-control" placeholder="Syllabus Name">
+                                        <span class="input-group-addon"><i class="fa fa-text-width"></i></span>
+                                    </div>
+                                </div>
+                                <div class="form-group" data-toggle="tooltip" data-placement="bottom" title="Development Officer">
+                                    <div class="input-group">
+                                        <input type="text" ng-model="Syllabus.DevelopmentOfficer" class="form-control" placeholder="Development Officer">
+                                        <span class="input-group-addon"><i class="fa fa-text-width"></i></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" data-toggle="tooltip" data-placement="bottom" title="Syllabus File">
+                                    <div class="input-group">
+                                        Syllabus File
+                                        <input type="file" class="form-control" ngf-select="UploadSylebusFiles($files)" />
+                                        <span class="input-group-addon"><i class="fa fa-file-o"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" data-toggle="tooltip" data-placement="bottom" title="Trade">
+                                    <div class="input-group input-group-md">
+                                        <select ng-model="ddlTrade" class="form-control selectMendatory" ng-options="aTrade.TradeName for aTrade in  TradeList track by aTrade.TradeId">
+                                            <option value="" label="Trade"></option>
+                                        </select>
+                                        <span class="input-group-addon"><i class="fa fa-rouble"></i></span>
+                                    </div>
+                                </div>
+                                <div class="form-group" data-toggle="tooltip" data-placement="bottom" title="Manager">
+                                    <div class="input-group">
+                                        <input type="text" ng-model="Syllabus.Manager" class="form-control" placeholder="Manager">
+                                        <span class="input-group-addon"><i class="fa fa-text-width"></i></span>
+                                    </div>
+                                </div>
+                                <div class="form-group" data-toggle="tooltip" data-placement="bottom" title="Test plan File">
+                                    <div class="input-group">
+                                        Testplan File
+                                        <input type="file" class="form-control" ngf-select="UploadTestplanFiles($files)" />
+                                        <span class="input-group-addon"><i class="fa fa-file-o"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" data-toggle="tooltip" data-placement="bottom" title="Level">
+                                    <div class="input-group input-group-md">
+                                        <select ng-model="ddlLevel" class="form-control selectMendatory" ng-options="aLevel.LevelName for aLevel in  LevelList | filter:{TradeId:ddlTrade.TradeId} track by aLevel.LevelId">
+                                            <option value="" label="Level"></option>
+                                        </select>
+                                        <span class="input-group-addon"><i class="fa fa-rouble"></i></span>
+                                    </div>
+                                </div>
+                                <div class="form-group" data-toggle="tooltip" data-placement="bottom" title="Active Date">
+                                    <div class="input-group">
+                                        <input type="text" style="text-align:center" id="txtActiveDate" ng-readonly="true" ng-model="Syllabus.ActiveDate" class="form-control" placeholder="Active Date">
+                                        <span id="txtActiveDateIcon" class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" data-toggle="tooltip" data-placement="bottom" title="Language">
+                                    <div class="input-group input-group-md">
+                                        Language
+                                        <div ng-repeat="aLanguage in LanguageList">
+                                            <label><input type="checkbox" ng-model="aLanguage.Checked" />{{aLanguage.LanguageName}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="panel-footer">
+                            <button ng-click="Save()" class="btn btn-primary">
+                                <i class="fa fa-floppy-o"></i>&nbsp;{{Savebtnlbl}}
+                            </button>
+                            &nbsp;
+                            <button ng-click="Reset()" class="btn btn-default">
+                                <i class="fa fa-refresh"></i>&nbsp;Reset
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group" data-toggle="tooltip" data-placement="bottom" title="Trade">
+                                    <div class="input-group input-group-md">
+                                        <select ng-model="ddlsearchTradeId" ng-change="Syllabus_GetDynamic()" class="form-control selectMendatory" ng-options="aTrade.TradeName for aTrade in  TradeList track by aTrade.TradeId">
+                                            <option value="" label="Trade"></option>
+                                        </select>
+                                        <span class="input-group-addon"><i class="fa fa-rouble"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" data-toggle="tooltip" data-placement="bottom" title="Level">
+                                    <div class="input-group input-group-md">
+                                        <select ng-model="ddlsearchLevelId" ng-change="Syllabus_GetDynamic()" class="form-control selectMendatory" ng-options="aLevel.LevelName for aLevel in  LevelList | filter:{TradeId:ddlsearchTradeId.TradeId} track by aLevel.LevelId">
+                                            <option value="" label="Level"></option>
+                                        </select>
+                                        <span class="input-group-addon"><i class="fa fa-rouble"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="responstable" style="width:100%;">
+                                    <tbody>
+                                        <tr>
+                                            <th style="text-align:center">SL</th>
+                                            <th style="text-align:left">Syllabus Name</th>
+                                            <th style="text-align:left">Trade</th>
+                                            <th style="text-align:left">Level</th>
+                                            <th style="text-align:left">Development Officer</th>
+                                            <th style="text-align:left">Manager</th>
+                                            <th style="text-align:left">Syllabus File</th>
+                                            <th style="text-align:left">Test plan File</th>
+                                            <th style="text-align:left">Language</th>
+                                            <th style="text-align:center">Active Date</th>
+                                        </tr>
+                                        <tr class="HoverTable" ng-repeat="aSyllabus in SyllabusList" ng-click="SelectGenre(aGenre)">
+                                            <td style="text-align:center">{{$index + 1}}</td>
+                                            <td style="text-align:left">{{aSyllabus.SyllabusName}}</td>
+                                            <td style="text-align:left">{{aSyllabus.TradeName}}</td>
+                                            <td style="text-align:left">{{aSyllabus.LevelName}}</td>
+                                            <td style="text-align:left">{{aSyllabus.DevelopmentOfficer}}</td>
+                                            <td style="text-align:left">{{aSyllabus.Manager}}</td>
+                                            <td style="text-align:left"><a href="http://localhost:25329/api/Syllabus/GetFile?fileName={{aSyllabus.SyllabusFileLocName}}&oName={{aSyllabus.SyllabusFileName}}" target="_blank">{{aSyllabus.SyllabusFileName}}</a></td>
+                                            <td style="text-align:left"><a href="http://localhost:25329/api/Syllabus/GetFile?fileName={{aSyllabus.TestplanFileLocName}}&oName={{aSyllabus.TestplanFileName}}" target="_blank">{{aSyllabus.TestplanFileName}}</a></td>
+                                            <td style="text-align:left">{{aSyllabus.AllLanguage}}</td>
+                                            <td style="text-align:center">{{aSyllabus.ActiveDate}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    var picker = new Pikaday({
+        field: document.getElementById('txtActiveDate'),
+        firstDay: 6,
+        format: "YYYY-MM-DD",
+        minDate: new Date('2010-01-01'),
+        maxDate: new Date('2050-12-31'),
+        yearRange: [2010, 2050],
+        theme: 'blue-theme'
+    });
+    document.getElementById("txtActiveDate").addEventListener("click", function () {
+        picker.show();
+    });
+    document.getElementById("txtActiveDateIcon").addEventListener("click", function () {
+        picker.show();
+    });
+</script>
+<style>
+    .thumb {
+        width: 24px;
+        height: 24px;
+        float: none;
+        position: relative;
+        top: 7px;
+    }
+
+    form .progress {
+        line-height: 15px;
+    }
+
+    .progress {
+        display: inline-block;
+        width: 100px;
+        border: 3px groove #ccc;
+    }
+
+        .progress > div {
+            font-size: smaller;
+            background-color: red;
+            width: 0%;
+        }
+</style>
